@@ -1,20 +1,25 @@
-.wrapper{
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
 .header{
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
+    justify-content: space-between;
 }
 
 .toggleText{
     cursor: pointer;
-    color: var(--color-primary);
+    color: var(--css-primary);
+
 }
 
 .cardsWrapper{
     margin-top: 18px;
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.filterWrapper{
+    margin-top: 15px;
 }

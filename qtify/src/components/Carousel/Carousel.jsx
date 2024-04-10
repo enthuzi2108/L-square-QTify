@@ -12,7 +12,7 @@ const Controls = ({data})=>{
     useEffect(()=>{
         swiper.slideTo(0,null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[data]);
+    },[data,swiper]);
     return <></>
 }
 
@@ -33,7 +33,7 @@ const Carousel = ({data,renderComponent}) => {
             {
                 data.map((ele)=>{
                     return (
-                        <SwiperSlide>{renderComponent(ele)}</SwiperSlide>
+                        <SwiperSlide key={ele.id}>{renderComponent(ele)}</SwiperSlide>
                     )
                 })
             }

@@ -1,38 +1,40 @@
+import React, { useEffect, useState } from 'react';
+import Navbar from './components/Navbar/Navbar.jsx';
+import HeroSection from './components/Hero/Hero.jsx';
+import { Outlet } from 'react-router-dom';
+import { StyledEngineProvider } from '@mui/material';
+import { fetchNewAlbums, fetchSongs, fetchTopAlbums } from './api/api.js';
 
-import './App.module.css';
-import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero'
-import { useEffect, useState } from 'react';
-import { fetchTopAlbums } from './api/api';
-// import Card from './components/Card/Card'
-import Section from './components/Section/Section';
 function App() {
-  const [topAlbumsData,setTopAlbumsData] = useState([])
 
-  const generateTopAlbums = async()=>{
-    try{
-      const data = await fetchTopAlbums();
-      setTopAlbumsData(data)
-    }catch(err){
-      console.error(err)
-    }
+  const [data, setData] = useState({});
+
+  const generateData = (key, source) => {
+    source().then((data) => {
+      setData((prevState) => {
+        return {...prevState, [key]: data};
+      })
+    })
   }
 
-  useEffect(()=>{
-    generateTopAlbums()
-  },[])
+  useEffect(() => {
+    generateData("topAlbums", fetchTopAlbums)
+    generateData("newAlbums", fetchNewAlbums)
+    generateData("songs", fetchSongs)
+  }, [])
+
+  const { topAlbums = [], newAlbums = [], songs = [] } = data;
+
+
   return (
     <div>
-      <Navbar/>
-      <Hero/>
-      {/* {
-        topAlbumsData.map((topAlbum)=>(
-          <Card data = {topAlbum} type = "album" key = {topAlbum.id}/>
-        ))
-      } */}
-      <Section data = {topAlbumsData} title = "Top Albums" type = "album" />
+      <StyledEngineProvider injectFirst>
+      <Navbar />
+      <HeroSection heading1="100 Thousand Songs, ad-free" heading2="Over thousands podcast episodes"/>
+      <Outlet context={{data : { topAlbums, newAlbums, songs } }} />
+      </StyledEngineProvider>
     </div>
-  );
+  )
 }
 
 export default App;
