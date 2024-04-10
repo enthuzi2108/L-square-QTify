@@ -15,9 +15,18 @@
 }
 
 body{
-  font-family: "Poppins",sans-serif;
+  font-family: "Poppins";
   line-height: 1.5;
   background-color: var(--color-black);
   color: var(--color-white);
   overflow-x: hidden;
+}
+
+img,svg{
+  display: block;
+  max-width: 100%;
+}
+
+.swiper-slide{
+  width: auto !important;
 }

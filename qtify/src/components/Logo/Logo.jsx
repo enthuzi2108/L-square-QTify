@@ -1,8 +1,10 @@
 import React from 'react'
+import styles from './Logo.module.css'
 import LogoImage from '../../assets/qtifyLogo.png'
-const Logo = () => {
+
+function Logo() {
   return (
-    <img src = {LogoImage} alt = 'logo' width = {67}/>
+    <img src={LogoImage} alt="Logo" className={styles.logo} />
   )
 }
 
